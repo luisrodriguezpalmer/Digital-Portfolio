@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Luis Rodriguez's Resume" />
+  <title>Luis Rodriguez's Resume</title>
+  <link rel="icon" type="image/x-icon" href="images/icons8-resume-64.png" />
+
+  <style>
+    body{
+        background-color:cadetblue;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    nav {
+        background-color: #333;
+        padding: 10px 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li {
+        margin: 0 15px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        transition: transform 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 6px 8px;
+        border-radius: 10px;
+    }
+
+    nav ul li a .nav-label{
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, 6px);
+        background-color: #222;
+        color: #fff;
+        padding: 6px 10px;
+        border-radius: 10px;
+        font-size: 14px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        pointer-events: none;
+        z-index: 10;
+    }
+
+    nav ul li a:hover .nav-label,
+    nav ul li a:focus-visible .nav-label{
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, 10px);
+    }
+
+    nav ul li a:hover,
+    nav ul li a:focus-visible {
+        transform: scale(1.08);
+    }
+
+    @media (max-width: 600px) {
+        nav ul {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 10px 0;
+        }
+
+        footer{
+            text-align: center;
+            padding: 0;
+        }
+    }
+
+    .header{
+        background-color: #666;
+        padding: 30px;
+        text-align: center;
+        font-size: 50px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .info{
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 20px;
+        padding: 24px 16px;
+    }
+
+    footer{
+        text-align: right;
+        background-color: #666;
+        font-size: 20px;
+        padding: 1px;
+    }
+
+    footer p {
+        color: white;
+        font-weight: bold;
+        margin: 5px;
+        padding-right: 25px;
+        font-style: italic;
+    }
+
+    .icon{
+        width: 40px;
+        height: 40px;
+    }
+
+    .maximg{
+        max-width: 70%;
+    }
+
+    .minimg{
+        width: 70%;
+    }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .info table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0 auto;
+        table-layout: fixed;
+    }
+
+    .info th, .info td {
+        word-wrap: break-word;
+        text-align: center;
+        vertical-align: middle;
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+
+    .info th {
+        background-color: #444;
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    .info td {
+        background-color:darkgrey;
+    }
+
+    .info select {
+        color: #333;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color:blanchedalmond;
+    }
+
+    .info th:hover, .info td:hover {
+        background-color:cadetblue;
+    }
+
+    .info select:focus {
+        outline: none;
+        border-color: #007BFF;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    @media (max-width: 768px) {
+        .info table {
+          display: block;
+          overflow-x: auto;
+        }
+
+        .info th, .info td {
+          display: block;
+          width: 100%;
+          border: none;
+          text-align: left;
+        }
+    }
+  
+    .resume-page{
+        text-align: left;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .resume-top{
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+    }
+
+    .headshot{
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid rgba(255,255,255,0.35);
+        flex: 0 0 auto;
+    }
+
+    .contact-card{
+        background: rgba(255,255,255,0.20);
+        border: 1px solid rgba(255,255,255,0.25);
+        border-radius: 14px;
+        padding: 14px 16px;
+        min-width: 260px;
+    }
+
+    .resume-name{
+        margin: 0 0 6px 0;
+        font-size: 32px;
+        line-height: 1.1;
+    }
+
+    .contact-line{
+        margin: 4px 0;
+        font-size: 16px;
+    }
+
+    /* Shared content blocks */
+    .content-block{
+        background: rgba(255,255,255,0.15);
+        border: 1px solid rgba(255,255,255,0.20);
+        border-radius: 14px;
+        padding: 16px;
+        margin: 14px 0;
+        text-align: left;
+    }
+
+    .content-block h2{
+        margin-top: 0;
+    }
+
+    .doc-link{
+        display: inline-block;
+        margin-top: 10px;
+        font-weight: bold;
+        color: #0a2a2e;
+        background: rgba(255,255,255,0.55);
+        padding: 8px 12px;
+        border-radius: 10px;
+        text-decoration: none;
+    }
+
+    .doc-link:hover{
+        transform: scale(1.02);
+    }
+
+    /* ===== Community Service grid ===== */
+    .cs-grid{
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 16px;
+    }
+
+    .cs-item{
+        background: rgba(255,255,255,0.15);
+        border: 1px solid rgba(255,255,255,0.20);
+        border-radius: 14px;
+        padding: 14px;
+    }
+
+    .cs-item h2{
+        margin: 0 0 10px 0;
+        text-align: center;
+    }
+
+    .cs-img{
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+    @media (max-width: 900px){
+        .cs-grid{ grid-template-columns: 1fr; }
+        .resume-page{ padding: 0 10px; }
+        .contact-card{ width: 100%; }
+    }
+
+
+    /* Community Service layout */
+    .community-container {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        align-items: center;
+    }
+
+    .community-event {
+        max-width: 800px;
+        text-align: center;
+    }
+
+  
+    .community-event h2 {
+        margin-bottom: 15px;
+    }
+
+    .community-event img {
+        border-radius: 10px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <header class="header">Luis Rodriguez's Resume</header>
+
+  <nav>
+    <ul>
+      <li>
+        <a href="#" data-page="resume" aria-label="Resume">
+          <img src="images/icons8-resume-64.png" alt="Resume" class="icon" aria-hidden="true" />
+          <span class="nav-label">Resume</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-page="community" aria-label="Community Service">
+          <img src="images/icons8-community-48.png" alt="Community Service" class="icon" aria-hidden="true" />
+          <span class="nav-label">Community Service</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-page="sample" aria-label="Sample Work">
+          <img src="images/icons8-journal-50.png" alt="Sample Work" class="icon" aria-hidden="true" />
+          <span class="nav-label">Sample Work</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Resume Page -->
+  <section class="info page active resume-page" id="resume">
+
+    <!-- Resume Image -->
+    <div class="content-block" style="text-align:center;">
+      <img src="images/Screenshot 2026-02-06 112947.png" alt="Resume" class="maximg" />
+    </div>
+
+    <!-- Bio -->
+    <div class="content-block">
+      <h2>Bio</h2>
+      <p>Luis Rodriguez is an aspiring data scientist and AI enthusiast currently studying Computer Science at the Honors College of Miami Dade College. As a freshman, he is already engaged in undergraduate research that bridges linear algebra with the mechanisms behind Google’s search algorithms, reflecting his deep interest in both theoretical and applied computing. Beyond his academic pursuits in STEM, Luis channels his curiosity into the humanities. He is the vice-president of Verba Vitae, a student-run book club that delves into how literature, science, and personal development intertwine. This role allows him to explore broader perspectives while fostering meaningful dialogue among peers. Luis aims to build a career in Data Science and Artificial Intelligence, where he hopes to develop technologies that enhance decision-making, promote ethical innovation, and improve lives through intelligent systems</p>
+    </div>
+
+  </section>
+
+  <!-- Community Service Page -->
+  <section class="info page" id="community">
+    <div class="community-container">
+    <h1>Community Service</h1>
+
+    <div class="cs-grid">
+      <div class="cs-item">
+        <h2>St. Jude Walk</h2>
+        <img src="images/WhatsApp Image 2026-02-06 at 11.47.34 AM(2).jpeg" class="cs-img" alt="St. Jude Walk" />
+      </div>
+
+      <div class="cs-item">
+        <h2>Verba Vitae Book Club</h2>
+        <img src="images/WhatsApp Image 2026-02-06 at 11.47.34 AM(1).jpeg" class="cs-img" alt="Verba Vitae Book Club" />
+      </div>
+
+      <div class="cs-item">
+        <h2>Reading Marathon</h2>
+        <img src="images/WhatsApp Image 2026-02-06 at 11.47.34 AM.jpeg" class="cs-img" alt="Reading Marathon" />
+      </div>
+    </div>
+      </div>
+  </section>
+
+  <!-- Sample Work Page -->
+  <section class="info page" id="sample">
+    <h1>Sample Work</h1>
+
+    <div class="content-block">
+      <h2>Research Abstract</h2>
+      <h3>The Math Behind Google’s PageRank Algorithm</h3>  
+      <h3>Luis Rodriguez, Roxana Martell, Maria Romero, and Luis Rodriguez, M.S.,</h3> 
+      <h3>Miami Dade College, Padron Campus, Miami, FL</h3>  
+      <h3>Abstract</h3>
+      <p>The Google Matrix is a fundamental tool in computing the PageRank vector, which ranks webpages by their importance. It’s built from the structure of hyperlinks across the web and models the behavior of a “random surfer” 
+        who either follows a link on a page or jumps to a random site. The dominant eigenvector of this matrix gives the steady-state distribution of the surfer’s location, the PageRank vector. In our project, we focused on 
+        constructing the Google Matrix from an initial hyperlink graph, incorporating a damping factor to simulate random jumps, and resolving challenges like sink nodes and dead ends. Once the matrix was built, we computed its 
+        steady-state vector using both iterative and analytical approaches. Finally, we analyzed how different link structures affected convergence speed and ranking stability.
+      </p>
+    </div>
+
+    <div class="content-block">
+      <h2>[insert reflection header here]</h2>
+      <p>[insert reflection text here]</p>
+    </div>
+  </section>
+
+  <script>
+    function showPage(pageId) {
+      const pages = document.querySelectorAll(".page");
+      pages.forEach(p => p.classList.remove("active"));
+
+      const target = document.getElementById(pageId);
+      if (target) target.classList.add("active");
+    }
+
+    document.querySelectorAll("nav a[data-page]").forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        showPage(link.getAttribute("data-page"));
+      });
+    });
+  </script>
+</body>
+</html>
